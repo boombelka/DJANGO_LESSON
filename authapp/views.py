@@ -4,6 +4,7 @@ from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
 # from .models import ShopUser
+from .forms import ShopUserRegisterForm  # подключение модуля для автоматизированных форм регистрации
 
 
 def login(request):
@@ -23,7 +24,17 @@ def logout(request):
 
 
 def register(request):
-    return HttpResponseRedirect(reverse('main'))
+    form = ShopUserRegisterForm()
+    if request.method == 'POST':
+        form = ShopUserRegisterForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save()
+            auth.login(request, user)
+            return HttpResponseRedirect(reverse('main'))
+    else:
+        form = ShopUserRegisterForm()
+
+    return render(request, 'authapp/register.html', {'form': form})
 
 
 def edit(request):
