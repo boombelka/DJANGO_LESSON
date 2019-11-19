@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Products</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'mainapp/base.html' %}
+{% block content %}
+    <h3>{{ title }}</h3>
+    <ul>
+        {% for product in products %}
+           <p>{{ product.name }}</p>
+            <img src="{{ product.image }}" alt="{{ product.image.name }}">
+            <p>Цена: {{ product.price }}</p>
+            <p>Описание товара</p>
+            <p>{{ product.description }}</p>
+        {% endfor %}
+    </ul>
+{% endblock %}
