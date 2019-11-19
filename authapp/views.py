@@ -24,17 +24,16 @@ def logout(request):
 
 
 def register(request):
-    form = ShopUserRegisterForm()
-    if request.method == 'POST':
+    form = ShopUserRegisterForm()   # 1этап. приходит get запрос и мы создаем пустую форму
+    if request.method == 'POST':   # 2 этап работа с уже заполненной формой
         form = ShopUserRegisterForm(request.POST, request.FILES)
-        if form.is_valid():
-            user = form.save()
-            auth.login(request, user)
+        if form.is_valid(): # 2.4 если форма неправильная то заполненая форма возвращается с ошибками.
+            user = form.save()  # 2.2 заполнили форму и в базу данных внесли нового пользователя
+            auth.login(request, user)    # 2.3. новоиспеченного юзера перенаправляем на главную страницу
             return HttpResponseRedirect(reverse('main'))
-    else:
         form = ShopUserRegisterForm()
 
-    return render(request, 'authapp/register.html', {'form': form})
+    return render(request, 'authapp/register.html', {'form': form})  # 1.1. форма пустая передается на регистрацию в register.html
 
 
 def edit(request):
