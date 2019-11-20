@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-
+from django.forms import forms
 from .models import ShopUser
 
 
@@ -23,6 +23,13 @@ class ShopUserRegisterForm(UserCreationForm):
         super(ShopUserRegisterForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
+    def clean_age(self):     # создание функции изменения возраста.
+        data = self.cleaned_data['age']
+        if data < 18:
+            raise forms.ValidationError('Вы слишком молоды')
+
+        return data
 """
 часть урока с регистрацией. и созданием форм автоматизированно.
 """

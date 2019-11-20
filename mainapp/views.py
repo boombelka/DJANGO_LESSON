@@ -14,12 +14,16 @@ def main(request):
 
 
 def products(request):
-    context = {'products': Product.objects.all()}
+    context = {
+        'title': 'ПРОДУКТЫ',
+        'products': 'Product.objects.all()'}
     return render(request, 'mainapp/products.html', context)
 
 
 def contacts(request):
     context = {
-        'title': 'Админ-консоль'
+        'title': 'Контакты'
     }
     return render(request, 'mainapp/contacts.html', context)
+
+

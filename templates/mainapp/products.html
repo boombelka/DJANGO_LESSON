@@ -8,6 +8,9 @@
             <p>Цена: {{ product.price }}</p>
             <p>Описание товара</p>
             <p>{{ product.description }}</p>
+            <a href="{% url 'basket:add' product.pk %}">Добавить в корзину</a>
+            <br>
+            <a href="{% url 'basket:remove' product.pk %}">Удалить из корзины</a>
         {% endfor %}
     </ul>
 {% endblock %}

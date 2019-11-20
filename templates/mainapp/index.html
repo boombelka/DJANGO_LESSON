@@ -1,1 +1,12 @@
 {% extends 'mainapp/base.html' %}
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <h3 class="test">{{ title }}</h3>
+    {% if request.user.is_autenticated %}
+    <h4>Привет, {{ request.user.username|title }} !</h4>
+    {% else %}
+        <div>ПРИВЕТ!</div>
+    {% endif %}
+{% endblock %}
